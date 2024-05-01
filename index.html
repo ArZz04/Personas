@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>FIGURA</title>
+    <link rel="icon" href="C:\Users\w\OneDrive\Desktop\icons8-python-32.png" type="image/x-icon">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+<main class="bg-gradient-to-r from-pink-300 to-blue-300">
+    <div class="text-7xl text-center pt-24 p-4">
+        <h1 class="font-bold">PERSONAS</h1>
+        <h2 class="text-2xl">REPORTE DE PRÁCTICA</h2>
+    </div>
+
+    <div
+            class="grid grid-flow-rows grid-flow-cols gap-2 justify-items-center pt-10 pb-10"
+    >
+        <article class="w-1/2 container place-items-center">
+            <img
+                    class="h-full w-full border border-white rounded-xl border-4"
+                    src="./resources/portada.jpeg"
+            />
+
+        </article>
+
+        <div class="container w-1/3 p-4 text-center text-xl">
+            <h3 class="font-bold">NOMBRE:</h3>
+            <p>JUAN ALBERTO ARVIZU CASTILLO</p>
+            <h3 class="font-bold">SEMESTRE:</h3>
+            <p>2do Semestre</p>
+            <h3 class="font-bold">CARRERA:</h3>
+            <p>INGENIERIA EN SISTEMAS COMPUTACIONALES</p>
+        </div>
+
+        <article
+                class="container w-1/3 p-4 "
+        >
+            <h2 class="text-3xl font-bold text-center">INTRODUCCIÓN</h2>
+            <div class="text-2xl p-5">
+                <p>
+                    En el presente informe se detalla la práctica realizada para
+                    implementar la clase abstracta Figura, siguiendo las instrucciones
+                    dadas en clase. Esta práctica se enmarca en el contexto de la
+                    programación orientada a objetos, con el objetivo de entender los
+                    conceptos de abstracción, herencia y polimorfismo, así como su
+                    aplicación en la resolución de problemas relacionados con el
+                    cálculo de áreas y perímetros de diversas figuras geométricas.
+                </p>
+            </div>
+        </article>
+        <article
+                class="container w-1/6 p-4"
+        >
+            <h2 class="text-3xl font-bold text-center ">ÍNDICE</h2>
+            <div>
+                <ul class="text-center text-xl p-5">
+                    <li class="font-bold pb-4"><a href="#teoria">1. Teoría</a></li>
+                    <li class="font-bold pb-4">
+                        <a href="#desarrollo">2. Desarrollo</a>
+                    </li>
+                    <ul >
+                        <li class="font-bold pb-4">
+                            <a href="#enunciado">A) Enunciado</a>
+                        </li>
+                        <li class="font-bold pb-4">
+                            <a href="#diagrama-de-flujo">B) Diagrama de Flujo</a>
+                        </li>
+                        <li class="font-bold pb-4">
+                            <a href="#diagrama-de-clases">C) Diagrama de Clases</a>
+                        </li>
+                        <li class="font-bold pb-4"><a href="#codigo">D) Código</a></li>
+                        <li class="font-bold pb-4">
+                            <a href="#pruebas-funcionales">E) Pruebas Funcionales</a>
+                        </li>
+                    </ul>
+                    <li class="font-bold pb-4">
+                        <a href="#conclusiones">3. Conclusiones</a>
+                    </li>
+                    <li class="font-bold pb-4">
+                        <a href="#bibliografia">4. Bibliografía</a>
+                    </li>
+                </ul>
+            </div>
+        </article>
+    </div>
+
+    <div id="teoria" class="container mx-auto p-24">
+        <article
+                class="container p-4 border border-white rounded-xl border-4"
+        >
+            <h2 class="text-2xl font-bold text-center pb-10">
+                TEORÍA (CONCEPTOS, EJEMPLOS, ETC)
+            </h2>
+            <h3 class="font-bold text-center">Conceptos</h3>
+            <p class="font-bold">Clases Abstractas:</p><p>Son aquellas que no pueden ser instanciadas directamente, sino que sirven como plantillas para otras clases. Pueden contener métodos abstractos, es decir, métodos que no tienen una implementación definida en la clase abstracta, dejando su implementación a las clases hijas.</p>
+            <p class="font-bold">Polimorfismo:</p><p>Permite que objetos de diferentes clases respondan al mismo mensaje, comportándose de manera distinta según su tipo.</p>
+            <p class="font-bold">Encapsulamiento:</p><p>Es el mecanismo que permite ocultar la implementación interna de un objeto y restringir el acceso a sus datos, solo permitiendo interactuar con ellos a través de métodos específicos.</p>
+            <div class="pt-5 pb-5"><p class="font-bold text-center">@Override:</p>
+                <p>Indica que un método de una clase hija está sobrescribiendo (o implementando de forma específica) un método de la clase padre. Esto significa que el método en la clase hija tiene la misma firma (nombre y parámetros) que el método en la clase padre.</p>
+                <p>Al utilizar @Override, el compilador verifica que estés realmente sobrescribiendo un método existente en la superclase, ayudándote a evitar errores de sintaxis.</p>
+                <p class="font-bold">EJEMPLO</p>
+                <pre text-s>
+                    <code>
+                        class Animal {
+                            void hacerSonido() {
+                                System.out.println("Sonido de animal genérico");
+                            }
+                        }
+
+                        class Perro extends Animal {
+                            @Override
+                            void hacerSonido() {
+                                System.out.println("Guau");
+                            }
+                        }
+                    </code>
+                </pre>
+            </div>
+            <p class="font-bold">extends:</p><p>Es un operador en Java que se utiliza para verificar si un objeto es una instancia de una clase, una subclase o una interfaz. Retorna true si el objeto es una instancia del tipo especificado o de una de sus subclases, y false en caso contrario.</p>
+            <p class="font-bold">instanceof:</p><p>Es una palabra clave en Java que se utiliza en la declaración de clases para indicar que una clase es una subclase de otra clase. En otras palabras, una clase que "extiende" otra clase hereda los campos y métodos de la clase extendida.</p>
+
+        </article>
+    </div>
+
+    <div id="desarrollo" class="container mx-auto p-4">
+        <h2 class="text-4xl font-bold text-center pb-10">DESARROLLO</h2>
+
+        <div class="grid grid-rows-2 grid-flow-col gap-4 justify-center">
+            <article id="enunciado" class="p-4 border border-white rounded-xl border-4">
+                <h2 class="text-2xl font-bold text-center">ENUNCIADO</h2>
+                <div class="p-10 text-lg">
+                    <p>
+                        La problemática que se resuelve no representa una dificultad grave,
+                        sino más bien una oportunidad para desarrollar una herramienta de apoyo.
+                    </p>
+                    <p>
+                        Se busca implementar una jerarquía de clases que representen diversas figuras geométricas.
+                        Estas figuras geométricas, que incluyen círculos, cuadrados, triángulos, pentágonos,
+                        entre otras, deben depender de una clase base llamada Figura.
+                    </p>
+                    <p>
+                        Cada figura debe contar con métodos para calcular tanto su área como su perímetro.
+                    </p>
+                    <p>
+                        Muchas de las veces los usuarios tienen la dificultad o requieren de la practicidad
+                        de tener un software o app o hasta un simple script que les facilite su tarea diaria
+                        o alguna tarea que sea muy repetitiva, en este caso esta practica de figuras
+                    </p>
+                    <p>
+                        Al tu ingresar al script en este caso te muestra un menu con varias opciones
+                        (Circulo, Cuadrado, Triangulo, Pentagono) y al elegir uno de esos te pide los requisitos
+                        necesarios para realizar el calculo de el area de la figura seleccionada, retornando asi
+                        el area de la figura seleccionada.
+                    </p>
+                </div>
+            </article>
+
+            <article id="diagrama-de-flujo" class="container p-4 border border-white rounded-xl border-4">
+                <h2 class="text-2xl font-bold text-center">DIAGRAMA DE FLUJO</h2>
+                <!-- Diagrama de flujo -->
+            </article>
+
+            <article id="diagrama-de-clase" class="container p-4 border border-white rounded-xl border-4 max-w-full md:max-w-4xl">
+                <h2 class="text-2xl font-bold text-center">DIAGRAMA DE CLASES</h2>
+                <div class="p-10">
+                    <img src="./resources/clases.png" alt="">
+                </div>
+                <p class="text-center">FUENTE: Aportada por el profesor</p>
+            </article>
+
+
+            <article id="pruebas-funcionales" class="container p-4 border border-white rounded-xl border-4">
+                <h2 class="text-2xl font-bold text-center pb-10">PRUEBAS FUNCIONALES</h2>
+                <div class="relative ">
+                    <div class="carousel-inner w-full h-full flex justify-center">
+                        <div class="carousel-item absolute opacity-1 flex justify-center items-center">
+                            <img src="./resources/PF1.png" class="h-full max-w-80 object-contain" alt="Slide 1">
+                        </div>
+                        <div class="carousel-item absolute opacity-0 flex justify-center items-center">
+                            <img src="./resources/PF2.png" class="h-full max-w-80 object-contain" alt="Slide 2">
+                        </div>
+                        <div class="carousel-item absolute opacity-0 flex justify-center items-center">
+                            <img src="./resources/PF3.png" class="h-full max-w-80 object-contain" alt="Slide 3">
+                        </div>
+                        <div class="carousel-item absolute opacity-0 flex justify-center items-center">
+                            <img src="./resources/PF4.png" class="h-full max-w-80 object-contain" alt="Slide 4">
+                        </div>
+                    </div>
+                    <a class="absolute w-10 h-10 bg-gray-800 flex items-center justify-center rounded-full -left-1 transform -translate-y-1/2 cursor-pointer z-10 text-white" onclick="plusSlides(-1)">&#10094;</a>
+                    <a class="absolute w-10 h-10 bg-gray-800 flex items-center justify-center rounded-full -right-1 transform -translate-y-1/2 cursor-pointer z-10 text-white" onclick="plusSlides(1)">&#10095;</a>
+                </div>
+            </article>
+        </div>
+
+        <article id="codigo" class="container mx-auto m-4 bg-gray-100 p-8 rounded-lg shadow-md">
+            <h2 class="text-2xl font-bold text-center mb-4">CÓDIGO JAVA</h2>
+
+            <div class="">
+                <h2 class="font-bold text-center">MAIN</h2>
+                <pre class="overflow-x-auto bg-gray-200 rounded-md p-4">
+                        <code class="text-gray-800">
+                            import java.util.Scanner;
+
+                            public class Main {
+
+                                static Scanner rc = new Scanner(System.in);
+
+                                public static void main(String[] args) {
+
+                                    int op = 0;
+                                    do {
+                                        System.out.println("---- FIGURAS -----");
+                                        System.out.println("1.- Circulo");
+                                        System.out.println("2.- Cuadrado");
+                                        System.out.println("3.- Triangulo");
+                                        System.out.println("4.- Pentagono");
+                                        System.out.println("0.- Salir");
+                                        System.out.print("- Selecciona una opcion ->  ");
+                                        op = rc.nextInt();
+
+                                        switch (op) {
+                                            case 0:
+                                                System.out.println("---------------------------------------");
+                                                System.out.println("¡Programa finalizado con éxito!");
+                                                break;
+                                            case 1:
+                                                System.out.println("--------------| CÍRCULO |--------------");
+                                                System.out.println("Ingrese el radio del círculo: ");
+                                                if (rc.hasNextDouble()) {
+                                                    double radC = rc.nextDouble();
+                                                    Circulo circulo = new Circulo(radC);
+                                                    System.out.println("El área del círculo es: " + circulo.area());
+                                                } else {
+                                                    System.out.println("El valor ingresado no es válido.");
+                                                    rc.next(); // Limpiar el buffer del scanner
+                                                }
+                                                System.out.println("---------------------------------------");
+                                                break;
+                                            case 2:
+                                                System.out.println("--------------| CUADRADO |--------------");
+                                                System.out.println("Ingrese un lado del cuadrado: ");
+                                                if (rc.hasNextDouble()) {
+                                                    double ladC = rc.nextDouble();
+                                                    Cuadrado cuadrado = new Cuadrado(ladC);
+                                                    System.out.println("El área del cuadrado es: " + cuadrado.area());
+                                                } else {
+                                                    System.out.println("El valor ingresado no es válido.");
+                                                    rc.next(); // Limpiar el buffer del scanner
+                                                }
+                                                System.out.println("---------------------------------------");
+                                                break;
+                                            case 3:
+                                                System.out.println("-------------| TRIÁNGULO |-------------");
+                                                System.out.println("Ingrese la base del triángulo: ");
+                                                if (rc.hasNextDouble()) {
+                                                    double baseT = rc.nextDouble();
+                                                    System.out.println("Ingrese la altura del triángulo: ");
+                                                    if (rc.hasNextDouble()) {
+                                                        double altT = rc.nextDouble();
+                                                        Triangulo triangulo = new Triangulo(baseT, altT);
+                                                        System.out.println("El área del triángulo es: " + triangulo.area());
+                                                    } else {
+                                                        System.out.println("El valor ingresado no es válido.");
+                                                        rc.next(); // Limpiar el buffer del scanner
+                                                    }
+                                                } else {
+                                                    System.out.println("El valor ingresado no es válido.");
+                                                    rc.next(); // Limpiar el buffer del scanner
+                                                }
+                                                System.out.println("---------------------------------------");
+                                                break;
+                                            case 4:
+                                                System.out.println("-------------| PENTÁGONO |-------------");
+                                                System.out.println("Ingrese la longitud de un lado del pentágono: ");
+                                                if (rc.hasNextDouble()) {
+                                                    double longP = rc.nextDouble();
+                                                    Pentagono pentagono = new Pentagono(longP);
+                                                    System.out.println("El área del pentágono es: " + pentagono.area());
+                                                } else {
+                                                    System.out.println("El valor ingresado no es válido.");
+                                                    rc.next(); // Limpiar el buffer del scanner
+                                                }
+                                                System.out.println("---------------------------------------");
+                                                break;
+                                            default:
+                                                System.out.println("Opción inválida. Por favor, seleccione una opción válida.");
+                                                break;
+                                        }
+                                    } while (op != 0);
+
+                                    rc.close();
+                                }
+                            }
+                        </code>
+                    </pre>
+            </div>
+            <div class="">
+                <h2 class="font-bold text-center">FIGURAS</h2>
+                <pre class="overflow-x-auto bg-gray-200 rounded-md p-4">
+                        <code class="text-gray-800">
+                            public abstract class Figura {
+                                protected double x;
+                                protected double y;
+
+                                public Figura(double x, double y) {
+                                    this.x = x;
+                                    this.y = y;
+                                }
+
+                                public abstract double area();
+                            }
+                        </code>
+                    </pre>
+            </div>
+            <div class="grid grid-rows-2 grid-flow-col gap-4">
+                <div>
+                    <h2 class="font-bold text-center">CIRCULO</h2>
+                    <pre class=" bg-gray-200 ">
+                        <code class="text-gray-800">
+                            public class Circulo extends Figura {
+                                private double radio;
+
+                                public Circulo(double radio) {
+                                    super(0, 0);
+                                    this.radio = radio;
+                                }
+
+                                @Override
+                                public double area() {
+                                    return Math.PI * (radio * radio) ;
+                                }
+                            }
+                        </code>
+                    </pre>
+                </div>
+                <div>
+                    <h2 class="font-bold text-center">CUADRADO</h2>
+                    <pre class="overflow-x-auto bg-gray-200 rounded-md p-4">
+                        <code class="text-gray-800">
+                            public class Cuadrado extends Figura {
+                                private double lado;
+
+                                public Cuadrado(double lado) {
+                                    super(0, 0);
+                                    this.lado = lado;
+                                }
+
+                                @Override
+                                public double area() {
+                                    return lado * lado;
+                                }
+                            }
+                        </code>
+                    </pre>
+                </div>
+                <div>
+                    <h2 class="font-bold text-center">PENTAGONO</h2>
+                    <pre class="bg-gray-200 rounded-md p-4">
+                        <code class="text-gray-800">
+                            public class Pentagono extends Figura {
+                                private double lado;
+
+                                public Pentagono(double lado) {
+                                    super(0, 0);
+                                    this.lado = lado;
+                                }
+
+                                @Override
+                                public double area() {
+                                    int nlados = 5;
+                                    double perimetro = nlados * lado;
+                                    double apotema = lado / (2 * Math.tan(Math.PI / nlados));
+                                    return 0.5 * perimetro * apotema;
+                                }
+                            }
+                        </code>
+                    </pre>
+                </div>
+                <div>
+                    <h2 class="font-bold text-center">TRIANGULO</h2>
+                    <pre class="overflow-x-auto bg-gray-200 rounded-md p-4">
+                        <code class="text-gray-800">
+                            public class Triangulo extends Figura {
+                                private double base;
+                                private double altura;
+
+                                public Triangulo(double base, double altura) {
+                                    super(0, 0);
+                                    this.base = base;
+                                    this.altura = altura;
+                                }
+
+                                @Override
+                                public double area() {
+                                    return base * altura / 2;
+                                }
+                            }
+                        </code>
+                    </pre>
+                </div>
+
+            </div>
+            <button class="border rounded-xl border-4 border-zinc-900 w-full h-20"><a
+                    href="https://github.com/ArZz04/Figuras"><img class="mx-auto h-full" src="https://miro.medium.com/v2/0*N1fmHtI8gmkH_2Vu.png" alt=""></a></button>
+        </article>
+    </div>
+
+    <div
+            class="grid grid-flow-rows grid-flow-cols gap-2"
+    >
+        <div>
+            <article
+                    id="conclusiones"
+                    class="container mx-auto p-4 border border-white rounded-xl border-4 w-1/3"
+            >
+                <h2 class="text-2xl font-bold text-center pb-4">Conclusiones</h2>
+                <p>En el desarrollo de esta práctica, logre medio entender y creo que tambien supe usar o aplicar los
+                    conceptos de clases abstractas, polimorfismo y encapsulamiento.
+                    (Que esten bien usados es otra cosa JAJAJAJ)
+                    La creacion del menu es la que facilitara la interacción con el usuario y
+                    permitira una mejor comprension y funcionamiento del programa o script.
+                </p>
+            </article>
+        </div>
+
+        <div id="bibliografia" class="container mx-auto pt-10 pb-10 w-1/3">
+            <article
+                    class="container mx-auto p-4 border border-white rounded-xl border-4"
+            >
+                <h2 class="text-2xl font-bold text-center pb-5">Bibliografía</h2>
+                <p>LAS SIGUIENTES REFERENCIAS SON LINKS CON REDIRECCION.</p>
+                <p>1. <a href="https://math3logic.com/area-de-figura-geometricas/">Area de Figura Geometrica</a></p>
+                <p>2. <a href="https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Classes/extends">Documentacion de java (Extends)</a></p>
+                <p>3. <a href="https://www.tutorialesprogramacionya.com/javaya/detalleconcepto.php?punto=96&codigo=176&inicio=80">Ejemplo de Override</a></p>
+
+            </article>
+        </div>
+    </div>
+</main>
+<script>
+    var slideIndex = 1;
+    showSlides(slideIndex);
+
+    function plusSlides(n) {
+        showSlides(slideIndex += n);
+    }
+
+    function currentSlide(n) {
+        showSlides(slideIndex = n);
+    }
+
+    function showSlides(n) {
+        var i;
+        var slides = document.getElementsByClassName("carousel-item");
+        if (n > slides.length) {slideIndex = 1}
+        if (n < 1) {slideIndex = slides.length}
+        for (i = 0; i < slides.length; i++) {
+            slides[i].style.opacity = "0";
+        }
+        slides[slideIndex-1].style.opacity = "1";
+    }
+</script>
+</body>
+</html>
