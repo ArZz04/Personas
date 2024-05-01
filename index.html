@@ -93,32 +93,9 @@
                 TEORÍA (CONCEPTOS, EJEMPLOS, ETC)
             </h2>
             <h3 class="font-bold text-center">Conceptos</h3>
-            <p class="font-bold">Clases Abstractas:</p><p>Son aquellas que no pueden ser instanciadas directamente, sino que sirven como plantillas para otras clases. Pueden contener métodos abstractos, es decir, métodos que no tienen una implementación definida en la clase abstracta, dejando su implementación a las clases hijas.</p>
-            <p class="font-bold">Polimorfismo:</p><p>Permite que objetos de diferentes clases respondan al mismo mensaje, comportándose de manera distinta según su tipo.</p>
-            <p class="font-bold">Encapsulamiento:</p><p>Es el mecanismo que permite ocultar la implementación interna de un objeto y restringir el acceso a sus datos, solo permitiendo interactuar con ellos a través de métodos específicos.</p>
-            <div class="pt-5 pb-5"><p class="font-bold text-center">@Override:</p>
-                <p>Indica que un método de una clase hija está sobrescribiendo (o implementando de forma específica) un método de la clase padre. Esto significa que el método en la clase hija tiene la misma firma (nombre y parámetros) que el método en la clase padre.</p>
-                <p>Al utilizar @Override, el compilador verifica que estés realmente sobrescribiendo un método existente en la superclase, ayudándote a evitar errores de sintaxis.</p>
-                <p class="font-bold">EJEMPLO</p>
-                <pre text-s>
-                    <code>
-                        class Animal {
-                            void hacerSonido() {
-                                System.out.println("Sonido de animal genérico");
-                            }
-                        }
-
-                        class Perro extends Animal {
-                            @Override
-                            void hacerSonido() {
-                                System.out.println("Guau");
-                            }
-                        }
-                    </code>
-                </pre>
-            </div>
-            <p class="font-bold">extends:</p><p>Es un operador en Java que se utiliza para verificar si un objeto es una instancia de una clase, una subclase o una interfaz. Retorna true si el objeto es una instancia del tipo especificado o de una de sus subclases, y false en caso contrario.</p>
-            <p class="font-bold">instanceof:</p><p>Es una palabra clave en Java que se utiliza en la declaración de clases para indicar que una clase es una subclase de otra clase. En otras palabras, una clase que "extiende" otra clase hereda los campos y métodos de la clase extendida.</p>
+            <p class="font-bold">El encapsulamiento:</p><p>es un principio fundamental de la POO que consiste en ocultar la implementación interna de un objeto y permitir el acceso controlado a sus datos mediante métodos públicos. Esto ayuda a mantener la integridad de los datos y facilita el mantenimiento del código.</p>
+            <p class="font-bold">La herencia:</p><p>permite a una clase heredar atributos y métodos de otra clase. Esto fomenta la reutilización de código y la organización jerárquica de las clases.</p>
+            <p class="font-bold">El polimorfismo:</p><p>es un principio que permite a un objeto comportarse de diferentes maneras según el contexto en el que se utilice. Esto se logra mediante la implementación de métodos con el mismo nombre pero diferentes implementaciones en clases diferentes</p>
 
         </article>
     </div>
