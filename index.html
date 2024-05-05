@@ -143,7 +143,7 @@
                 <div class="p-10">
                     <img src="./resources/clases.png" alt="">
                 </div>
-                <p class="text-center">FUENTE: Aportada por el profesor</p>
+                <p class="text-center">FUENTE:</p>
             </article>
 
 
@@ -177,291 +177,370 @@
                 <h2 class="font-bold text-center">MAIN</h2>
                 <pre class="overflow-x-auto bg-gray-200 rounded-md p-4">
                         <code class="text-gray-800">
-                            package src;
+                            import java.util.ArrayList;
+                            import java.util.Scanner;
 
-import java.util.ArrayList;
-import java.util.Scanner;
+                            public class Main {
+                                static Scanner rc = new Scanner(System.in);
+                                static ArrayList<Persona> personas = new ArrayList<>();
 
-public class Main {
-    static Scanner rc = new Scanner(System.in);
-    static ArrayList<Persona> personas = new ArrayList<>();
+                                public static void main(String[] args) {
+                                    cargarPersonasDesdeArchivo();
 
-    public static void main(String[] args) {
-        cargarPersonasDesdeArchivo();
+                                    int op = 0;
+                                    do {
+                                        System.out.println("-----------------------------------------");
+                                        System.out.println("---------------| PERSONA |---------------");
+                                        System.out.println("1.- Agregar Persona");
+                                        System.out.println("2.- Buscar Persona");
+                                        System.out.println("3.- Modificar Persona");
+                                        System.out.println("4.- Eliminar Persona ");
+                                        System.out.println("0.- Salir");
+                                        System.out.print("- Selecciona una opcion ->  ");
+                                        op = rc.nextInt();
+                                        switch (op) {
+                                            case 0:
+                                                System.out.println("-----------------------------------------");
+                                                System.out.println("Programa finalizado con éxito!!...");
+                                                break;
+                                            case 1:
+                                                addPerson();
+                                                break;
+                                            case 2:
+                                                findPerson();
+                                                break;
+                                            case 3:
+                                                modifyPerson();
+                                                break;
+                                            case 4:
+                                                deletePerson();
+                                                break;
+                                            default:
+                                                System.out.println("Opción no válida. Inténtalo de nuevo.");
+                                                break;
+                                        }
 
-        int op = 0;
-        do {
-            System.out.println("-----------------------------------------");
-            System.out.println("---------------| PERSONA |---------------");
-            System.out.println("1.- Agregar Persona");
-            System.out.println("2.- Buscar Persona");
-            System.out.println("3.- Modificar Persona");
-            System.out.println("4.- Eliminar Persona ");
-            System.out.println("0.- Salir");
-            System.out.print("- Selecciona una opcion ->  ");
-            op = rc.nextInt();
-            switch (op) {
-                case 0:
-                    System.out.println("-----------------------------------------");
-                    System.out.println("Programa finalizado con éxito!!...");
-                    break;
-                case 1:
-                    addPerson();
-                    break;
-                case 2:
-                    findPerson();
-                    break;
-                case 3:
-                    modifyPerson();
-                    break;
-                case 4:
-                    deletePerson();
-                    break;
-                default:
-                    System.out.println("Opción no válida. Inténtalo de nuevo.");
-                    break;
-            }
+                                    } while (op != 0);
+                                    guardarPersonasEnArchivo();
+                                }
 
-        } while (op != 0);
-        guardarPersonasEnArchivo();
-    }
+                                public static void addPerson(){
+                                    int id;
+                                    String nombre, apellidoP, apellidoM, ciudad;
 
-    public static void addPerson(){
-        int id;
-        String nombre, apellidoP, apellidoM, ciudad;
+                                    System.out.println("-----------------------------------------");
+                                    System.out.println("-------------| REGISTRAR |---------------");
+                                    System.out.print("ID: ");
+                                    id = rc.nextInt();
 
-        System.out.println("-----------------------------------------");
-        System.out.println("-------------| REGISTRAR |---------------");
-        System.out.print("ID: ");
-        id = rc.nextInt();
+                                    if (!Controller.verifyId(id)) {
+                                        System.out.println("-----------| ID YA EXISTE |--------------");
+                                        return;
+                                    }
 
-        if (!Controller.verifyId(id)) {
-            System.out.println("-----------| ID YA EXISTE |--------------");
-            return;
-        }
+                                    System.out.print("Nombre: ");
+                                    nombre = rc.next();
+                                    System.out.print("Apellido Paterno: ");
+                                    apellidoP = rc.next();
+                                    System.out.print("Apellido Materno: ");
+                                    apellidoM = rc.next();
+                                    System.out.print("Ciudad: ");
+                                    ciudad = rc.next();
 
-        System.out.print("Nombre: ");
-        nombre = rc.next();
-        System.out.print("Apellido Paterno: ");
-        apellidoP = rc.next();
-        System.out.print("Apellido Materno: ");
-        apellidoM = rc.next();
-        System.out.print("Ciudad: ");
-        ciudad = rc.next();
+                                    Persona nuevaPersona = new Persona(id, nombre.toUpperCase(), apellidoP.toUpperCase(), apellidoM.toUpperCase(), ciudad.toUpperCase());
+                                    personas.add(nuevaPersona);
+                                    Controller.agregarUsuario(nuevaPersona);
+                                }
 
-        Persona nuevaPersona = new Persona(id, nombre.toUpperCase(), apellidoP.toUpperCase(), apellidoM.toUpperCase(), ciudad.toUpperCase());
-        personas.add(nuevaPersona);
-        Controller.agregarUsuario(nuevaPersona);
-    }
+                                public static void findPerson(){
+                                    int id;
 
-    public static void findPerson(){
-        int id;
+                                    System.out.println("-----------------------------------------");
+                                    System.out.println("-------------| ENCONTRAR |---------------");
+                                    System.out.print("ID: ");
+                                    id = (rc.nextInt());
 
-        System.out.println("-----------------------------------------");
-        System.out.println("-------------| ENCONTRAR |---------------");
-        System.out.print("ID: ");
-        id = (rc.nextInt());
+                                    boolean personaEncontrada = false;
+                                    for (Persona persona : personas) {
+                                        if (persona.getId() == id) {
+                                            personaEncontrada = true;
+                                            System.out.println("-----------------------------------------");
+                                            System.out.println("ID: " + persona.getId());
+                                            System.out.println("Nombre: " + persona.getNombre());
+                                            System.out.println("Apellido Paterno: " + persona.getApellidoP());
+                                            System.out.println("Apellido Materno: " + persona.getApellidoM());
+                                            System.out.println("Ciudad: " + persona.getCiudad());
+                                            System.out.println("-----------------------------------------");
+                                            break;
+                                        }
+                                    }
+                                    if (!personaEncontrada) {
+                                        System.out.println("-----------------------------------------");
+                                        System.out.println("--------| PERSONA NO ENCONTRADA |--------");
+                                    }
+                                }
 
-        boolean personaEncontrada = false;
-        for (Persona persona : personas) {
-            if (persona.getId() == id) {
-                personaEncontrada = true;
-                System.out.println("-----------------------------------------");
-                System.out.println("ID: " + persona.getId());
-                System.out.println("Nombre: " + persona.getNombre());
-                System.out.println("Apellido Paterno: " + persona.getApellidoP());
-                System.out.println("Apellido Materno: " + persona.getApellidoM());
-                System.out.println("Ciudad: " + persona.getCiudad());
-                System.out.println("-----------------------------------------");
-                break;
-            }
-        }
-        if (!personaEncontrada) {
-            System.out.println("-----------------------------------------");
-            System.out.println("--------| PERSONA NO ENCONTRADA |--------");
-        }
-    }
+                                public static void modifyPerson(){
+                                    int id;
+                                    String nombre, apellidoP, apellidoM, ciudad;
 
-    public static void modifyPerson(){
-        int id;
-        String nombre, apellidoP, apellidoM, ciudad;
+                                    System.out.println("-----------------------------------------");
+                                    System.out.println("-------------| MODIFICAR |---------------");
+                                    System.out.print("ID: ");
+                                    id = rc.nextInt();
 
-        System.out.println("-----------------------------------------");
-        System.out.println("-------------| MODIFICAR |---------------");
-        System.out.print("ID: ");
-        id = rc.nextInt();
+                                    for (Persona persona : personas) {
+                                        if (persona.getId() == id) {
+                                            System.out.print("Nombre: ");
+                                            nombre = rc.next();
+                                            System.out.print("Apellido Paterno: ");
+                                            apellidoP = rc.next();
+                                            System.out.print("Apellido Materno: ");
+                                            apellidoM = rc.next();
+                                            System.out.print("Ciudad: ");
+                                            ciudad = rc.next();
 
-        for (Persona persona : personas) {
-            if (persona.getId() == id) {
-                System.out.print("Nombre: ");
-                nombre = rc.next();
-                System.out.print("Apellido Paterno: ");
-                apellidoP = rc.next();
-                System.out.print("Apellido Materno: ");
-                apellidoM = rc.next();
-                System.out.print("Ciudad: ");
-                ciudad = rc.next();
+                                            persona.setNombre(nombre);
+                                            persona.setApellidoP(apellidoP);
+                                            persona.setApellidoM(apellidoM);
+                                            persona.setCiudad(ciudad);
+                                            Controller.modificarUsuario(persona);
+                                            return;
+                                        }
+                                    }
+                                    System.out.println("-----------------------------------------");
+                                    System.out.println("-------| PERSONA NO ENCONTRADA |---------");
+                                }
 
-                persona.setNombre(nombre);
-                persona.setApellidoP(apellidoP);
-                persona.setApellidoM(apellidoM);
-                persona.setCiudad(ciudad);
-                Controller.modificarUsuario(persona);
-                return;
-            }
-        }
-        System.out.println("-----------------------------------------");
-        System.out.println("-------| PERSONA NO ENCONTRADA |---------");
-    }
+                                public static void deletePerson(){
+                                    int id;
 
-    public static void deletePerson(){
-        int id;
+                                    System.out.println("-----------------------------------------");
+                                    System.out.println("--------------| ELIMINAR |---------------");
+                                    System.out.print("ID: ");
+                                    id = rc.nextInt();
 
-        System.out.println("-----------------------------------------");
-        System.out.println("--------------| ELIMINAR |---------------");
-        System.out.print("ID: ");
-        id = rc.nextInt();
+                                    for (Persona persona : personas) {
+                                        if (persona.getId() == id) {
+                                            personas.remove(persona);
+                                            Controller.eliminarUsuario(id);
+                                            return;
+                                        }
+                                    }
+                                    System.out.println("-----------------------------------------");
+                                    System.out.println("-------| PERSONA NO ENCONTRADA |---------");
+                                }
 
-        for (Persona persona : personas) {
-            if (persona.getId() == id) {
-                personas.remove(persona);
-                Controller.eliminarUsuario(id);
-                return;
-            }
-        }
-        System.out.println("-----------------------------------------");
-        System.out.println("-------| PERSONA NO ENCONTRADA |---------");
-    }
+                                private static void cargarPersonasDesdeArchivo() {
+                                    ArrayList<Persona> personasCargadas = FileManager.leerUsuarios();
+                                    if (personasCargadas != null) {
+                                        personas.addAll(personasCargadas);
+                                    }
+                                }
 
-    private static void cargarPersonasDesdeArchivo() {
-        ArrayList<Persona> personasCargadas = FileManager.leerUsuarios();
-        if (personasCargadas != null) {
-            personas.addAll(personasCargadas);
-        }
-    }
-
-    private static void guardarPersonasEnArchivo() {
-        FileManager.sobreescribirUsuarios(personas);
-    }
-}
+                                private static void guardarPersonasEnArchivo() {
+                                    FileManager.sobreescribirUsuarios(personas);
+                                }
+                            }
 
                         </code>
                     </pre>
             </div>
             <div class="">
-                <h2 class="font-bold text-center">FIGURAS</h2>
+                <h2 class="font-bold text-center">CONTROLLER</h2>
                 <pre class="overflow-x-auto bg-gray-200 rounded-md p-4">
                         <code class="text-gray-800">
-                            public abstract class Figura {
-                                protected double x;
-                                protected double y;
+                            import java.io.BufferedWriter;
+                            import java.io.FileWriter;
+                            import java.io.IOException;
+                            import java.util.ArrayList;
 
-                                public Figura(double x, double y) {
-                                    this.x = x;
-                                    this.y = y;
+                            public class Controller {
+                                private static final String FILENAME = "data/persons.txt";
+
+                                public static void agregarUsuario(Persona persona) {
+                                    try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILENAME, true))) {
+                                        writer.write(persona.getId() + "," + persona.getNombre() + "," +
+                                                persona.getApellidoP() + "," + persona.getApellidoM() + "," +
+                                                persona.getCiudad());
+                                        writer.newLine();
+                                        System.out.println("--------------| GUARDADO |---------------");
+                                    } catch (IOException e) {
+                                        System.out.println("Error al agregar usuario: " + e.getMessage());
+                                    }
                                 }
 
-                                public abstract double area();
+                                public static void modificarUsuario(Persona persona) {
+                                    ArrayList<Persona> personas = FileManager.leerUsuarios();
+                                    boolean encontrado = false;
+                                    for (int i = 0; i < personas.size(); i++) {
+                                        if (personas.get(i).getId() == persona.getId()) {
+                                            personas.set(i, persona);
+                                            encontrado = true;
+                                            break;
+                                        }
+                                    }
+                                    if (encontrado) {
+                                        FileManager.sobreescribirUsuarios(personas);
+                                        System.out.println("-------------| MODIFICADO |--------------");
+                                    } else {
+                                        System.out.println("----------| EL ID NO EXISTE |------------");
+                                    }
+                                }
+
+                                public static void eliminarUsuario(int id) {
+                                    ArrayList<Persona> personas = FileManager.leerUsuarios();
+                                    boolean encontrado = false;
+                                    for (int i = 0; i < personas.size(); i++) {
+                                        if (personas.get(i).getId() == id) {
+                                            personas.remove(i);
+                                            encontrado = true;
+                                            break;
+                                        }
+                                    }
+                                    if (encontrado) {
+                                        FileManager.sobreescribirUsuarios(personas);
+                                        System.out.println("-----------------------------------------");
+                                        System.out.println("--------------| ELIMINADO |--------------");
+                                    } else {
+                                        System.out.println("----------| EL ID NO EXISTE |------------");
+                                    }
+                                }
+
+                                static boolean verifyId(int id) {
+                                    ArrayList<Persona> usuarios = FileManager.leerUsuarios();
+                                    for (Persona usuario : usuarios) {
+                                        if (usuario.getId() == id) {
+                                            return false;
+                                        }
+                                    }
+                                    return true;
+                                }
                             }
+
                         </code>
                     </pre>
             </div>
-            <div class="grid grid-rows-2 grid-flow-col gap-4">
+            <div class="">
                 <div>
-                    <h2 class="font-bold text-center">CIRCULO</h2>
+                    <h2 class="font-bold text-center">FILEMANAGER</h2>
                     <pre class=" bg-gray-200 ">
                         <code class="text-gray-800">
-                            public class Circulo extends Figura {
-                                private double radio;
+                            import java.io.BufferedReader;
+                            import java.io.FileReader;
+                            import java.io.FileWriter;
+                            import java.io.IOException;
+                            import java.util.ArrayList;
 
-                                public Circulo(double radio) {
-                                    super(0, 0);
-                                    this.radio = radio;
+                            public class FileManager {
+                                private static final String FILENAME = "data/persons.txt";
+
+                                public static ArrayList<Persona> leerUsuarios() {
+                                    ArrayList<Persona> usuarios = new ArrayList<>();
+                                    try (BufferedReader reader = new BufferedReader(new FileReader(FILENAME))) {
+                                        String line;
+                                        while ((line = reader.readLine()) != null) {
+                                            String[] parts = line.split(",");
+                                            int id = Integer.parseInt(parts[0]);
+                                            String nombre = parts[1];
+                                            String apellidoPaterno = parts[2];
+                                            String apellidoMaterno = parts[3];
+                                            String ciudad = parts[4];
+                                            Persona persona = new Persona(id, nombre, apellidoPaterno, apellidoMaterno, ciudad);
+                                            usuarios.add(persona);
+                                        }
+                                    } catch (IOException e) {
+                                        System.out.println("Error al leer usuarios: " + e.getMessage());
+                                    }
+                                    return usuarios;
                                 }
 
-                                @Override
-                                public double area() {
-                                    return Math.PI * (radio * radio) ;
+                                public static void sobreescribirUsuarios(ArrayList<Persona> usuarios) {
+                                    try (FileWriter writer = new FileWriter(FILENAME)) {
+                                        for (Persona persona : usuarios) {
+                                            writer.write(persona.getId() + "," + persona.getNombre() + "," +
+                                                    persona.getApellidoP() + "," + persona.getApellidoM() + "," +
+                                                    persona.getCiudad() + "\n");
+                                        }
+                                    } catch (IOException e) {
+                                        System.out.println("Error al sobreescribir usuarios: " + e.getMessage());
+                                    }
                                 }
                             }
+
                         </code>
                     </pre>
                 </div>
                 <div>
-                    <h2 class="font-bold text-center">CUADRADO</h2>
+                    <h2 class="font-bold text-center">PERSONAS</h2>
                     <pre class="overflow-x-auto bg-gray-200 rounded-md p-4">
                         <code class="text-gray-800">
-                            public class Cuadrado extends Figura {
-                                private double lado;
+                            public class Persona {
 
-                                public Cuadrado(double lado) {
-                                    super(0, 0);
-                                    this.lado = lado;
+                                // ID, NOMBRE, APELLIDO PATERNO, APELLIDO MATERNO, CIUDAD
+                                private int id;
+                                private String nombre, apellidoP, apellidoM, ciudad;
+
+                                public Persona(int id, String nombre, String apellidoP, String apellidoM, String ciudad){
+                                    this.id = id;
+                                    this.nombre = nombre;
+                                    this.apellidoP = apellidoP;
+                                    this.apellidoM = apellidoM;
+                                    this.ciudad = ciudad;
                                 }
 
-                                @Override
-                                public double area() {
-                                    return lado * lado;
-                                }
-                            }
-                        </code>
-                    </pre>
-                </div>
-                <div>
-                    <h2 class="font-bold text-center">PENTAGONO</h2>
-                    <pre class="bg-gray-200 rounded-md p-4">
-                        <code class="text-gray-800">
-                            public class Pentagono extends Figura {
-                                private double lado;
-
-                                public Pentagono(double lado) {
-                                    super(0, 0);
-                                    this.lado = lado;
+                                public int getId() {
+                                    return id;
                                 }
 
-                                @Override
-                                public double area() {
-                                    int nlados = 5;
-                                    double perimetro = nlados * lado;
-                                    double apotema = lado / (2 * Math.tan(Math.PI / nlados));
-                                    return 0.5 * perimetro * apotema;
-                                }
-                            }
-                        </code>
-                    </pre>
-                </div>
-                <div>
-                    <h2 class="font-bold text-center">TRIANGULO</h2>
-                    <pre class="overflow-x-auto bg-gray-200 rounded-md p-4">
-                        <code class="text-gray-800">
-                            public class Triangulo extends Figura {
-                                private double base;
-                                private double altura;
-
-                                public Triangulo(double base, double altura) {
-                                    super(0, 0);
-                                    this.base = base;
-                                    this.altura = altura;
+                                public void setId(int id) {
+                                    this.id = id;
                                 }
 
-                                @Override
-                                public double area() {
-                                    return base * altura / 2;
+                                public String getNombre() {
+                                    return nombre;
+                                }
+
+                                public void setNombre(String nombre) {
+                                    this.nombre = nombre.toUpperCase();
+                                }
+
+                                public String getApellidoP() {
+                                    return apellidoP;
+                                }
+
+                                public void setApellidoP(String apellidoP) {
+                                    this.apellidoP = apellidoP.toUpperCase();
+                                }
+
+                                public String getApellidoM() {
+                                    return apellidoM;
+                                }
+
+                                public void setApellidoM(String apellidoM) {
+                                    this.apellidoM = apellidoM.toUpperCase();
+                                }
+
+                                public String getCiudad() {
+                                    return ciudad;
+                                }
+
+                                public void setCiudad(String ciudad) {
+                                    this.ciudad = ciudad.toUpperCase();
                                 }
                             }
+
                         </code>
                     </pre>
                 </div>
 
             </div>
             <button class="border rounded-xl border-4 border-zinc-900 w-full h-20"><a
-                    href="https://github.com/ArZz04/Figuras"><img class="mx-auto h-full" src="https://miro.medium.com/v2/0*N1fmHtI8gmkH_2Vu.png" alt=""></a></button>
+                    href="https://github.com/ArZz04/Personas"><img class="mx-auto h-full" src="https://miro.medium.com/v2/0*N1fmHtI8gmkH_2Vu.png" alt=""></a></button>
         </article>
     </div>
 
-    <div
-            class="grid grid-flow-rows grid-flow-cols gap-2"
-    >
+    <div class="grid grid-flow-rows grid-flow-cols gap-2">
         <div>
             <article
                     id="conclusiones"
